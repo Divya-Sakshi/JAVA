@@ -1,0 +1,38 @@
+public class PangramChecker {
+    public static void main(String[] args) {
+        String input = "The quick brown fox jumps over the lazy dog";
+
+        boolean isPangram = checkIfPangram(input);
+        
+        if (isPangram) {
+            System.out.println("The input is a pangram.");
+        } else {
+            System.out.println("The input is not a pangram.");
+        }
+    }
+
+    public static boolean checkIfPangram(String input) {
+        // Convert the input to lowercase for case-insensitivity
+        input = input.toLowerCase();
+
+        // Create a boolean array to mark the presence of each letter
+        boolean[] alphabetPresent = new boolean[26];
+
+        // Iterate through the input to mark the presence of each letter
+        for (int i = 0; i < input.length(); i++) {
+            char c = input.charAt(i);
+            if (Character.isLetter(c)) {
+                int index = c - 'a';
+                alphabetPresent[index] = true;
+            }
+        }
+
+        // Check if all letters are present in the input
+        for (boolean present : alphabetPresent) {
+            if (!present) {
+                return false; // If any letter is missing, it's not a pangram
+            }
+        }
+        return true; // All letters are present, it's a pangram
+    }
+}
